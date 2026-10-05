@@ -1,21 +1,21 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/inicio"></ion-back-button>
     </ion-buttons>
     <ion-title>
-      Catálogo
+      Productos
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <h1>Nuestros productos</h1>
+  <h1>Listado de productos</h1>
 
   @if (loading) {
     <div class="loading">
-      <ion-spinner color="primary"></ion-spinner>
-      <p>Cargando catálogo...</p>
+      <ion-spinner></ion-spinner>
+      <p>Cargando productos...</p>
     </div>
   }
 
@@ -34,9 +34,9 @@
   }
 
   @if (!loading && !error) {
-    <p class="summary">
-      Mostrando <strong>{{ products.length }}</strong>
-      de <strong>{{ total }}</strong> productos
+    <p>
+      Productos cargados:
+      <strong>{{ products.length }}</strong>
     </p>
 
     <div class="table-container">
@@ -55,24 +55,18 @@
         <tbody>
           @for (product of products; track product.id) {
             <tr>
-              <td>#{{ product.id }}</td>
+              <td>{{ product.id }}</td>
               <td>
                 <div class="product">
                   <img [src]="product.thumbnail" [alt]="product.title">
                   <span>{{ product.title }}</span>
                 </div>
               </td>
-              <td>
-                <span class="tag">{{ product.category }}</span>
-              </td>
+              <td>{{ product.category }}</td>
               <td>{{ product.brand || 'Sin marca' }}</td>
-              <td class="price">{{ product.price | currency:'EUR' }}</td>
+              <td>{{ product.price | currency:'EUR' }}</td>
               <td>⭐ {{ product.rating }}</td>
-              <td>
-                <span class="stock" [class.low]="product.stock < 20">
-                  {{ product.stock }}
-                </span>
-              </td>
+              <td>{{ product.stock }}</td>
             </tr>
           }
         </tbody>
