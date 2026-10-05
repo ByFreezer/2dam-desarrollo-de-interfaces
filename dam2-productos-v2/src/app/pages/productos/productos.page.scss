@@ -1,0 +1,82 @@
+.loading {
+  text-align: center;
+  padding: 40px;
+}
+
+.summary {
+  color: var(--ion-color-medium);
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+}
+
+table {
+  width: 100%;
+  min-width: 900px;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 14px 12px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.25);
+  text-align: left;
+}
+
+th {
+  background: linear-gradient(135deg, #7c3aed, #ec4899);
+  color: white;
+  font-weight: 600;
+}
+
+tbody tr:nth-child(even) {
+  background: rgba(124, 58, 237, 0.06);
+}
+
+.product {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.product img {
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+  border-radius: 12px;
+  background: rgba(128, 128, 128, 0.15);
+}
+
+.tag {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(124, 58, 237, 0.15);
+  color: var(--ion-color-primary);
+  font-size: 0.85rem;
+  text-transform: capitalize;
+}
+
+.price {
+  font-weight: 700;
+}
+
+.stock {
+  display: inline-block;
+  min-width: 36px;
+  padding: 3px 10px;
+  border-radius: 8px;
+  text-align: center;
+  background: rgba(34, 197, 94, 0.18);
+  color: #15803d;
+  font-weight: 600;
+
+  &.low {
+    background: rgba(239, 68, 68, 0.18);
+    color: #b91c1c;
+  }
+}
