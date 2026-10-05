@@ -1,0 +1,21 @@
+.about {
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.6;
+
+  h1 {
+    font-weight: 700;
+    color: var(--ion-color-primary);
+  }
+
+  h2 {
+    margin-top: 28px;
+  }
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}

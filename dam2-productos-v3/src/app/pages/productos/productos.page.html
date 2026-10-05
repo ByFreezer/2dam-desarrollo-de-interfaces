@@ -1,0 +1,142 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/inicio"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Catálogo
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="top-bar">
+    <h1>Nuestros productos</h1>
+    <ion-button routerLink="/inicio" fill="outline" shape="round">
+      Volver al inicio
+    </ion-button>
+  </div>
+
+  @if (loading) {
+    <div class="loading">
+      <ion-spinner color="primary"></ion-spinner>
+      <p>Cargando catálogo...</p>
+    </div>
+  }
+
+  @if (error) {
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Error</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>{{ error }}</p>
+        <ion-button (click)="loadProducts()">
+          Reintentar
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  }
+
+  @if (!loading && !error) {
+    <p class="summary">
+      Mostrando <strong>{{ firstItem }}-{{ lastItem }}</strong>
+      de <strong>{{ total }}</strong> productos
+      (página {{ page }} de {{ totalPages }})
+    </p>
+
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Producto</th>
+            <th>Categoría</th>
+            <th>Marca</th>
+            <th>Precio</th>
+            <th>Dto.</th>
+            <th>Valoración</th>
+            <th>Ancho</th>
+            <th>Alto</th>
+            <th>Stock</th>
+            <th>Stock valorado</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (product of products; track product.id) {
+            <tr>
+              <td>#{{ product.id }}</td>
+              <td>
+                <div class="product">
+                  <img [src]="product.thumbnail" [alt]="product.title">
+                  <span>{{ product.title }}</span>
+                </div>
+              </td>
+              <td>
+                <span class="tag">{{ product.category }}</span>
+              </td>
+              <td>{{ product.brand || 'Sin marca' }}</td>
+              <td class="price">{{ product.price | currency:'EUR' }}</td>
+              <td>{{ product.discountPercentage | number:'1.0-2' }}%</td>
+              <td>⭐ {{ product.rating }}</td>
+              <td>{{ product.dimensions.width | number:'1.0-2' }}</td>
+              <td>{{ product.dimensions.height | number:'1.0-2' }}</td>
+              <td>
+                <span class="stock" [class.low]="product.stock < 20">
+                  {{ product.stock }}
+                </span>
+              </td>
+              <td class="price">{{ stockValue(product) | currency:'EUR' }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <p class="note">
+      Stock valorado = unidades × (precio − descuento aplicable).
+      Ancho y alto en las unidades que devuelve la API.
+    </p>
+
+    <nav class="pagination">
+      <ion-button
+        fill="outline"
+        size="small"
+        [disabled]="page === 1"
+        (click)="goToPage(1)">
+        «
+      </ion-button>
+      <ion-button
+        fill="outline"
+        size="small"
+        [disabled]="page === 1"
+        (click)="goToPage(page - 1)">
+        Anterior
+      </ion-button>
+
+      @for (p of pages; track p) {
+        <ion-button
+          size="small"
+          [fill]="p === page ? 'solid' : 'outline'"
+          (click)="goToPage(p)">
+          {{ p }}
+        </ion-button>
+      }
+
+      <ion-button
+        fill="outline"
+        size="small"
+        [disabled]="page === totalPages"
+        (click)="goToPage(page + 1)">
+        Siguiente
+      </ion-button>
+      <ion-button
+        fill="outline"
+        size="small"
+        [disabled]="page === totalPages"
+        (click)="goToPage(totalPages)">
+        »
+      </ion-button>
+    </nav>
+  }
+</ion-content>

@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/inicio"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      About
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <section class="about">
+    <h1>Sobre Mi Tienda DAM2</h1>
+
+    <p>
+      Mi Tienda DAM2 es una tienda online de ejemplo creada como práctica
+      del módulo de Desarrollo de Interfaces de 2º de DAM. Nuestro catálogo
+      reúne productos de categorías muy distintas, desde calzado y relojes
+      hasta artículos para el hogar, y se muestra siempre al día porque se
+      alimenta en tiempo real de una API REST pública.
+    </p>
+
+    <p>
+      La aplicación está desarrollada con Ionic y Angular Standalone. Ofrece
+      una consulta clara del catálogo: precio, descuento, valoración,
+      dimensiones, stock y el valor total del stock de cada producto,
+      todo ello paginado para navegar con comodidad.
+    </p>
+
+    <h2>Quién está detrás</h2>
+    <p>
+      Puedes ver mi trabajo y el código de este proyecto en mi perfil de GitHub.
+    </p>
+
+    <div class="actions">
+      <ion-button
+        [href]="githubUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        shape="round">
+        Ver mi perfil de GitHub
+      </ion-button>
+
+      <ion-button routerLink="/inicio" fill="outline" shape="round">
+        Volver al inicio
+      </ion-button>
+    </div>
+  </section>
+</ion-content>
